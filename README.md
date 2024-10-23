@@ -1,0 +1,2 @@
+# Leetcode
+Compilation of leetcode 
