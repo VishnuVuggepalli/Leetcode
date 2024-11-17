@@ -24,7 +24,6 @@ class Solution {
                 stack.push(operations[op]);
                 break;
         }
-        System.out.println(stack);
       }
       while(!stack.isEmpty()){
         sum += Integer.parseInt(stack.pop());
