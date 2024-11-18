@@ -19,7 +19,7 @@ class Solution {
 
         int left = maxDepth(root.left);
         int right = maxDepth(root.right);
-        System.out.println(left + \ \ + right);
+        //System.out.println(left + \ \ + right);
         return Math.max(left,right) +1;
     }
 
