@@ -7,7 +7,6 @@ class Solution:
             if s[left] not in visited:
                 visited.append(s[left])
                 while right > left and s[right] != s[left]:
-                    print(right)
                     right -= 1
                 palindrome_count += len(set(s[left+1 : right]))
         return palindrome_count
