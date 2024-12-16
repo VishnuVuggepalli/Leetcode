@@ -10,7 +10,6 @@ class Solution {
                 int k = nums.length-1;
                 int j = i+1;
                 while(j < k){
-                    //System.out.println(i + \ \ + j);
                     if(nums[j] + nums[k] > (-1 * nums[i]))
                     {
                         k--;
