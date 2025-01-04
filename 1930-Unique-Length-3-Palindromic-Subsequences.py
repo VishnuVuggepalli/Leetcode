@@ -1,12 +1,14 @@
 class Solution:
     def countPalindromicSubsequence(self, s: str) -> int:
-        visited = []
-        palindrome_count =0
-        for left in range(len(s)):
-            right = len(s)-1
-            if s[left] not in visited:
-                visited.append(s[left])
-                while right > left and s[right] != s[left]:
-                    right -= 1
-                palindrome_count += len(set(s[left+1 : right]))
-        return palindrome_count
+        alpha_set = set()
+        palin_count =0
+        for i in range(len(s)):
+            j = len(s) - 1
+            if s[i] not in alpha_set:
+                alpha_set.add(s[i])
+                while s[j] != s[i]:
+                    j -= 1
+                palin_count += len(set(s[i+1:j]))
+        
+        return palin_count
+            
