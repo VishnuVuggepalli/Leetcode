@@ -1,30 +1,33 @@
 class Solution {
     public List<String> wordSubsets(String[] words1, String[] words2) {
-        int[] freq = new int[26];
-        for(String s: words2){
-            int[] count = new int[26];
-            for(char ch: s.toCharArray()){
-                count[ch - 'a'] += 1;
-                freq[ch - 'a'] = Math.max(freq[ch - 'a'], count[ch-'a']);
+        List<String> subSets = new ArrayList<>();
+        int[] maxFreqs = new int[26];
+        for(String word : words2){
+            int[] freqs = new int[26];
+            for(char c: word.toCharArray()){
+                if(freqs[c - 'a'] != 0) freqs[c - 'a'] += 1;
+                else  freqs[c - 'a'] = 1;
+                maxFreqs[c - 'a'] = Math.max(maxFreqs[c - 'a'], freqs[c - 'a']);
             }
         }
-
-        List<String> res = new ArrayList<>();
+        //System.out.println(Arrays.toString(maxFreqs));
+        
         for(String word : words1){
-            int i = 0;
-            int[] count  = new int[26];
+            int[] freqs = new int[26];
             for(char c : word.toCharArray()){
-                count[c - 'a']++;
+                if(freqs[c - 'a'] != 0) freqs[c - 'a'] += 1;
+                else  freqs[c - 'a'] = 1;
             }
-            for (i = 0 ; i < 26 ;i++){
-                if (freq[i] > count[i]){
+            boolean flag = true;
+            for(int i = 0; i < maxFreqs.length; i ++){
+                if (maxFreqs[i] > 0 && freqs[i] < maxFreqs[i])
+                {
+                    flag = false;
                     break;
                 }
             }
-            if (i == 26) {
-                res.add(word);
-            }
+            if(flag)    subSets.add(word);
         }
-        return res;
+        return subSets;
     }
 }
