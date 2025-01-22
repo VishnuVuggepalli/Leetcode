@@ -5,27 +5,24 @@ class Solution {
         for(char c: s.toCharArray()){
             countMap.put(c,countMap.getOrDefault(c,0) + 1);
         }
-        PriorityQueue<Character> pq = new PriorityQueue<>((a,b) -> countMap.get(b) - countMap.get(a));
-        pq.addAll(countMap.keySet());
+
+
+        Queue<Map.Entry<Character,Integer>> pq = new PriorityQueue<>((a,b) -> Integer.compare(b.getValue(), a.getValue()));
+        pq.addAll(countMap.entrySet());
+        Map.Entry<Character, Integer> prev = null;
         String ordS = "";
-        while(pq.size() > 1){
-            char c1 = pq.poll();
-            char c2 = pq.poll();
 
-            ordS += "" + c1;
-            ordS += "" + c2;
 
-            countMap.put(c1,countMap.get(c1) - 1);
-            countMap.put(c2,countMap.get(c2) - 1);
-
-            if(countMap.get(c1) > 0)    pq.add(c1);
-            if(countMap.get(c2) > 0)    pq.add(c2);
-        }
         while(!pq.isEmpty()){
-            char last = pq.poll();
-            if(countMap.get(last) > 1) return "";
-            ordS += last;
+            Map.Entry<Character,Integer> cur = pq.poll();
+            ordS += "" + cur.getKey();
+            cur.setValue(cur.getValue() -1 );
+
+            if(prev != null && prev.getValue() > 0)    pq.offer(prev);
+
+            prev = cur;
         }
+        if(s.length() != ordS.length()) return "";
         return ordS;
     }
 }
