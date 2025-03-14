@@ -8,10 +8,11 @@ class Solution {
         }
         int lowerBound  = 1;
         while(lowerBound <= upperBound){
-            int mid = (lowerBound + upperBound ) / 2;
+            int mid = lowerBound + (upperBound - lowerBound)/ 2;
             long sum = 0;
             for(int i = 0; i < N; i++){
                 sum += candies[i] / mid;
+                if (sum >= k)   break;
             }
             // System.out.println(lowerBound + " " +  upperBound + " " + sum);
             if (sum >= k){
@@ -19,7 +20,7 @@ class Solution {
                 lowerBound = mid + 1;
             }
             else{
-                upperBound = mid - 1; 
+                upperBound = mid- 1; 
             }
         }
         return maxCandies;
